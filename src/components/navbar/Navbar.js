@@ -2,9 +2,20 @@ import React from 'react'
 import styled from "styled-components";
 import { useSpring, animated, config } from "react-spring";
 
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  NavLink
+} from 'react-router-dom';
+
 import Brand from "./Brand";
 import BurgerMenu from "./BurgerMenu";
 import CollapseMenu from "./CollapseMenu";
+import AboutPage from '../../pages/aboutPage/aboutPage.component';
+import LogInPage from '../../pages/logInPage/logInPage.component';
+import SignUpPage from '../../pages/signUpPage/signUpPage.component';
+import Homepage from '../../pages/homePage/homePage.component';
 
 const Navbar = (props) => {
   const barAnimation = useSpring({
@@ -20,29 +31,46 @@ const Navbar = (props) => {
   });
 
   return (
-    <div>
-      <NavBar style={barAnimation}>
-        <FlexContainer>
-          <Brand />
-          <NavLinks style={linkAnimation}>
-            <a href="/">Home</a>
-            <a href="/">About</a>
-            <a href="/">Customer Login</a>
-            <a href="/">Restaurant Login</a>
-          </NavLinks>
-          <BurgerWrapper>
-            <BurgerMenu
-              navbarState={props.navbarState}
-              handleNavbar={props.handleNavbar}
-            />
-          </BurgerWrapper>
-        </FlexContainer>
-      </NavBar>
-      <CollapseMenu
-        navbarState={props.navbarState}
-        handleNavbar={props.handleNavbar}
-      />
-    </div>
+    <Router>
+      <div>
+        <NavBar style={barAnimation}>
+          <FlexContainer>
+            <Brand />
+            <NavLinks style={linkAnimation}>
+              <NavLink to="/">Home</NavLink>
+              <NavLink to="/about">About</NavLink>
+              <NavLink to="/login">Log In</NavLink>
+              <NavLink to="/signup">Sign Up</NavLink>
+            </NavLinks>
+            <BurgerWrapper>
+              <BurgerMenu
+                navbarState={props.navbarState}
+                handleNavbar={props.handleNavbar}
+              />
+            </BurgerWrapper>
+          </FlexContainer>
+        </NavBar>
+        <CollapseMenu
+          navbarState={props.navbarState}
+          handleNavbar={props.handleNavbar}
+        />
+
+        <Switch>
+          <Route path='/about'>
+            <AboutPage />
+          </Route>
+          <Route path='/login'>
+            <LogInPage />
+          </Route>
+          <Route path='/signup'>
+            <SignUpPage />
+          </Route>
+          <Route path='/'>
+            <Homepage />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   )
 }
 
