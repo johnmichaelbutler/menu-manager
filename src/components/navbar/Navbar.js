@@ -39,8 +39,8 @@ const Navbar = (props) => {
             <NavLinks style={linkAnimation}>
               <NavLink to="/">Home</NavLink>
               <NavLink to="/about">About</NavLink>
-              <NavLink to="/login">Log In</NavLink>
-              <NavLink to="/signup">Sign Up</NavLink>
+              <NavLink to="/login" id='sign-in-status'></NavLink>
+              <NavLink to="/login" id='sign-in'></NavLink>
             </NavLinks>
             <BurgerWrapper>
               <BurgerMenu

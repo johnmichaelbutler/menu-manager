@@ -1,10 +1,10 @@
 import React from 'react';
-import FirebaseUI from '../../components/firebaseUI/firebaseUI.component';
+import LogIn from '../../components/logInScreen/logIn.component';
 
 
 const LogInPage = () => (
   <div>
-    <FirebaseUI />
+    <LogIn />
   </div>
 );
 
