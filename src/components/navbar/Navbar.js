@@ -16,8 +16,15 @@ import AboutPage from '../../pages/aboutPage/aboutPage.component';
 import LogInPage from '../../pages/logInPage/logInPage.component';
 import SignUpPage from '../../pages/signUpPage/signUpPage.component';
 import Homepage from '../../pages/homePage/homePage.component';
+import firebase from 'firebase';
+
+
+import { useSelector } from 'react-redux';
 
 const Navbar = (props) => {
+  const isSignedIn = useSelector(state => state.isSignedIn);
+  console.log("isSignedIn:" + isSignedIn);
+
   const barAnimation = useSpring({
     from: { transform: 'translate3d(0, -10rem, 0)' },
     transform: 'translate3d(0, 0, 0)',
@@ -39,8 +46,14 @@ const Navbar = (props) => {
             <NavLinks style={linkAnimation}>
               <NavLink to="/">Home</NavLink>
               <NavLink to="/about">About</NavLink>
-              <NavLink to="/login" id='sign-in-status'></NavLink>
-              <NavLink to="/login" id='sign-in'></NavLink>
+              <NavLink to="/login">Log In</NavLink>
+              <NavLink to="/signup">Sign Up</NavLink>
+              { isSignedIn ? (
+                <NavLink to="/" onClick={() => firebase.auth().signOut()}>Sign Out</NavLink>
+                ): (
+                <NavLink to="/"></NavLink>
+                )
+              }
             </NavLinks>
             <BurgerWrapper>
               <BurgerMenu
@@ -74,9 +87,9 @@ const Navbar = (props) => {
   )
 }
 
-export default Navbar
+export default Navbar;
 
-const NavBar = styled(animated.nav)`
+const NavBar = styled(animated.div)`
   position: fixed;
   width: 100%;
   top: 0;
