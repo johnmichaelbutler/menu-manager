@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import firebase from 'firebase';
 
 
